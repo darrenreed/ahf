@@ -78,6 +78,9 @@
 /** Descriptive string of the TIPSY file type */
 #define IO_FILE_TIPSY_STR "TIPSY binary"
 
+/** Descriptive string of the NCHILADA file type */
+#define IO_FILE_NCHILADA_STR "NCHILADA binary"
+
 /** Descriptive string of the ART file type */
 #define IO_FILE_ART_STR "ART binary"
 
@@ -141,6 +144,8 @@ typedef enum {
 	IO_FILE_DEVANATIVE = 81,
 	/** For TIPSY format */
 	IO_FILE_TIPSY = 90,
+        /** For NCHILADA format */
+        IO_FILE_NCHILADA = 110,
 	/** Unkown format, try to guess (not implemented..) */
 	IO_FILE_UNKOWN = 100,
 	/** For an empty file handler */

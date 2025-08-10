@@ -315,9 +315,9 @@ local_readRequired(io_parameter_t params, parse_ini_t ini)
    }
   
   /*-----------------
-   *      TIPSY
+   *      TIPSY or NCHILADA
    *-----------------*/
-  if(params->ic_filetype == IO_FILE_TIPSY)
+  if((params->ic_filetype == IO_FILE_TIPSY) || (params->ic_filetype == IO_FILE_NCHILADA))
    {
     FILE   *fpout;
     double TIPSY_BOXSIZE, TIPSY_MUNIT, TIPSY_VUNIT, TIPSY_EUNIT, TIPSY_OMEGA0, TIPSY_LAMBDA0;
@@ -349,7 +349,7 @@ local_readRequired(io_parameter_t params, parse_ini_t ini)
     if(global_mpi.rank == 0) // only the master should write the file
      {
 #endif
-      if( (fpout = fopen("tipsy.info","w")) == NULL)
+      if( (fpout = fopen("tipsy.info","w")) == NULL)     /////// TODO: should it be nchilada.info for nchilada files?
        {
         fprintf(stderr,"Could not open tipsy.info\nAborting\n");
         exit(0);

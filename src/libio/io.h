@@ -30,6 +30,7 @@
 #endif
 #include "io_deva.h"
 #include "io_tipsy.h"
+#include "io_nchilada.h"
 #include "io_parameter.h"
 #include "io_defs.h"
 

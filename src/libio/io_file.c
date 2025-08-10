@@ -28,6 +28,7 @@
 #endif
 #include "io_deva.h"
 #include "io_tipsy.h"
+#include "io_nchilada.h"
 
 
 /***********************************************************************\
@@ -103,6 +104,9 @@ io_file_typestr(io_file_type_t type)
     case IO_FILE_TIPSY:
       return IO_FILE_TIPSY_STR;
       
+    case IO_FILE_NCHILADA:
+      return IO_FILE_NCHILADA_STR;
+
     case IO_FILE_UNKOWN:
       return IO_FILE_UNKOWN_STR;
       
@@ -231,7 +235,11 @@ io_file_open(io_logging_t   log,
       dummy = (io_file_t)io_tipsy_open(log, fname, swapped, mode,
                                        reader);
       break;
-    default:
+    case IO_FILE_NCHILADA:
+      dummy = (io_file_t)io_nchilada_open(log, fname, swapped, mode,
+                                       reader);
+      break;
+     default:
       io_logging_fatal(log,
                        "File format %s not supported for %s!",
                        io_file_typestr(type), __func__);
@@ -296,6 +304,9 @@ io_file_close(io_logging_t log,
       break;
     case IO_FILE_TIPSY:
       io_tipsy_close(log, (io_tipsy_t *)f);
+      break;
+    case IO_FILE_NCHILADA:
+      io_nchilada_close(log, (io_nchilada_t *)f);
       break;
     case IO_FILE_EMPTY:
 #ifdef WITH_MPI
@@ -368,6 +379,9 @@ io_file_init(io_logging_t log,
       break;
     case IO_FILE_TIPSY:
       io_tipsy_init(log, (io_tipsy_t)f);
+      break;
+    case IO_FILE_NCHILADA:
+      io_nchilada_init(log, (io_nchilada_t)f);
       break;
     default:
       io_logging_fatal(log,
@@ -476,7 +490,12 @@ io_file_readpart(io_logging_t          log,
                               pskip_parallel, pread_parallel,
                               strg);
       break;
-    default:
+    case IO_FILE_NCHILADA:
+      tmp = io_nchilada_readpart(log, (io_nchilada_t)f,
+                              pskip_parallel, pread_parallel,
+                              strg);
+      break;
+      default:
       io_logging_fatal(log,
                        "File format %s not supported for %s!",
                        io_file_typestr(f->ftype), __func__);
@@ -662,7 +681,10 @@ io_file_get(io_logging_t  log,
     case IO_FILE_TIPSY:
       return io_tipsy_get(log, (io_tipsy_t)f, what, res);
       
-    default:
+    case IO_FILE_NCHILADA:
+      return io_nchilada_get(log, (io_nchilada_t)f, what, res);
+
+     default:
       io_logging_fatal(log,
                        "File format %s not supported for %s!",
                        io_file_typestr(f->ftype), __func__);
@@ -705,7 +727,11 @@ io_file_set(io_logging_t  log,
     case IO_FILE_PKDGRAV:
       return io_pkdgrav_set(log, (io_pkdgrav_t)f, what, res);
 #endif
-      
+
+///// TODO: check whether needed      
+//  case IO_FILE_NCHILADA:
+//      return io_nchilada_set(log, (io_nchilada_t)f, what, res);
+
     default:
       io_logging_fatal(log,
                        "File format %s not supported for %s!",
@@ -767,6 +793,9 @@ io_file_log(io_logging_t log,
       break;
     case IO_FILE_TIPSY:
       io_tipsy_log(log, (io_tipsy_t)f);
+      break;
+    case IO_FILE_NCHILADA:
+      io_nchilada_log(log, (io_nchilada_t)f);
       break;
     default:
       io_logging_fatal(log,

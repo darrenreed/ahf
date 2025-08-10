@@ -45,6 +45,9 @@ OBJS = io_logging.o \
        io_read_fortran.o\
        io_tipsy.o\
        io_tipsy_header.o\
+       io_nchilada.o\
+       io_nchilada_header.o\
+       io_nchilada_file.o\
        io_util.o \
        io_parameter.o \
        io_artnew.o \
@@ -99,6 +102,9 @@ io_file.o: io_file.h io_file_aux.h \
            io_deva_header.h io_deva_header_def.h \
            io_tipsy.h io_tipsy_def.h \
            io_tipsy_header.h io_tipsy_header_def.h \
+           io_nchilada.h io_nchilada_def.h \
+           io_nchilada_header.h io_nchilada_header_def.h \
+           io_nchilada_file_def.h \
            io_logging.h \
            io_file.c
 	$(CC) $(CFLAGS) -c -o io_file.o io_file.c
@@ -248,6 +254,25 @@ io_tipsy_header.o: io_tipsy_header.h \
                    io_util.h \
                    io_tipsy_header.c
 	$(CC) $(CFLAGS) -c -o io_tipsy_header.o io_tipsy_header.c
+
+io_nchilada.o: io_nchilada.h \
+            io_nchilada_header_def.h io_nchilada_def.h io_file.h io_file_aux.h \
+            io_logging.h io_util.h \
+            io_nchilada.c
+	$(CC) $(CFLAGS) -c -o io_nchilada.o io_nchilada.c
+
+io_nchilada_header.o: io_nchilada_header.h \
+                   io_nchilada_header_def.h io_nchilada_def.h io_logging.h \
+                   io_util.h \
+                   io_nchilada_header.c
+	$(CC) $(CFLAGS) -c -o io_nchilada_header.o io_nchilada_header.c
+
+####################  TODO: check ############################################################################
+io_nchilada_file.o: io_nchilada_file_def.h \
+                   io_nchilada_header_def.h io_nchilada_def.h io_logging.h \
+                   io_util.h \
+                   io_nchilada_file.c
+	$(CC) $(CFLAGS) -c -o io_nchilada_file.o io_nchilada_file.c
 
 io_read_fortran.o:		io_read_fortran.c\
 											io_util.h

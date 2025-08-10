@@ -2016,3 +2016,5 @@
 07/03/2024   - added -DNFILES_MUST_MATCH_HEADER which affects the analysis of multiple (Gadget) snapshot files
 (BUILD 116)    -> AHF only continues when the number of found files matches the number of files as specified in the file header
              - removed -std=c99 from all compile flags
+
+10/08/2025   - added capability to read NChilada format files

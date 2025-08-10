@@ -9,6 +9,7 @@
  *   2001-2005      Stuart Gill
  *   2006-2012      Steffen Knollmann
  *   2018           Doug Rennehan (GIZMO I/O)
+ *   2025           Darren Reed (NChilada I/O)
  *
  * -------------------------
  * | HDF5toGADGET_WCui*.py |
